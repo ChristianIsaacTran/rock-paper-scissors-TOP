@@ -13,7 +13,9 @@ let humanScore = 0;
 let computerScore = 0;
 
 const container = document.querySelector("#container");
-const results = document.createElement("div");
+const roundResults = document.createElement("div");
+const humanScoreDisplay = document.createElement("div");
+const compScoreDisplay = document.createElement("div");
 
 const btnRock = document.createElement("button");
 const btnPaper = document.createElement("button");
@@ -27,11 +29,14 @@ btnRock.style.margin = "10px";
 btnPaper.style.margin = "10px";
 btnScissors.style.margin = "10px";
 
+updateScoreDisplay();
+
 container.appendChild(btnRock);
 container.appendChild(btnPaper);
 container.appendChild(btnScissors);
-container.appendChild(results);
-
+container.appendChild(roundResults);
+container.appendChild(humanScoreDisplay);
+container.appendChild(compScoreDisplay);
 
 /*
 Objective: Write a function that randomly returns a string "rock", "paper", or "scissors".
@@ -89,26 +94,26 @@ Check for computer winner. If human is NOT the winner, then increment the comput
 function playRound(humanChoice, computerChoice) {
     if (humanChoice === "ROCK" && computerChoice === "Scissors") {
         console.log("You win! Rock beats Scissors!");
-        results.textContent = "You win! Rock beats Scissors!";
+        roundResults.textContent = "You win! Rock beats Scissors!";
         humanScore++;
     }
     else if (humanChoice === "PAPER" && computerChoice === "Rock") {
         console.log("You win! Paper beats Rock!");
-        results.textContent = "You win! Paper beats Rock!";
+        roundResults.textContent = "You win! Paper beats Rock!";
         humanScore++;
     }
     else if (humanChoice === "SCISSORS" && computerChoice === "Paper") {
         console.log("You win! Scissors beats Paper!");
-        results.textContent = "You win! Scissors beats Paper!";
+        roundResults.textContent = "You win! Scissors beats Paper!";
         humanScore++;
     }
     else if (humanChoice === computerChoice.toUpperCase()) {
         console.log("It's a tie! No one wins.")
-        results.textContent = "It's a tie! No one wins.";
+        roundResults.textContent = "It's a tie! No one wins.";
     }
     else {
         console.log("You LOSE! " + computerChoice + " beats " + humanChoice + "!");
-        results.textContent = "You LOSE! " + computerChoice + " beats " + humanChoice + "!";
+        roundResults.textContent = "You LOSE! " + computerChoice + " beats " + humanChoice + "!";
         computerScore++;
     }
 }
@@ -126,19 +131,27 @@ function checkWinner() {
     }
 }
 
-btnRock.addEventListener("click", function(){
+function updateScoreDisplay() {
+    humanScoreDisplay.textContent = "Human Score: " + humanScore;
+    compScoreDisplay.textContent = "Computer Score: " + computerScore;
+}
+
+btnRock.addEventListener("click", function () {
     console.log("ROCK IS CLICKED");
     playRound(getHumanChoice("ROCK"), getComputerChoice());
+    updateScoreDisplay();
 });
 
-btnPaper.addEventListener("click", function(){
+btnPaper.addEventListener("click", function () {
     console.log("PAPER IS CLICKED");
     playRound(getHumanChoice("PAPER"), getComputerChoice());
+    updateScoreDisplay();
 });
 
-btnScissors.addEventListener("click", function(){
+btnScissors.addEventListener("click", function () {
     console.log("SCISSORS IS CLICKED");
     playRound(getHumanChoice("SCISSORS"), getComputerChoice());
+    updateScoreDisplay();
 });
 
 
