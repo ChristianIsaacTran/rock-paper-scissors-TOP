@@ -92,12 +92,6 @@ else random variable equals anything else, return "scissors"
         }
     }
 
-    //Play 5 rounds, new choices every round by recalling the functions
-    playRound(getHumanChoice(), getComputerChoice());
-    playRound(getHumanChoice(), getComputerChoice());
-    playRound(getHumanChoice(), getComputerChoice());
-    playRound(getHumanChoice(), getComputerChoice());
-    playRound(getHumanChoice(), getComputerChoice());
 
     //Check who has higher score and declare winner
     if(humanScore > computerScore){
