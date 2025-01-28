@@ -11,11 +11,13 @@ console.log a winner
 //Global scope score variables
 let humanScore = 0;
 let computerScore = 0;
+let roundsPlayed = 0;
 
 const container = document.querySelector("#container");
 const roundResults = document.createElement("div");
 const humanScoreDisplay = document.createElement("div");
 const compScoreDisplay = document.createElement("div");
+const gameOverDisplay = document.createElement("div");
 
 const btnRock = document.createElement("button");
 const btnPaper = document.createElement("button");
@@ -37,6 +39,7 @@ container.appendChild(btnScissors);
 container.appendChild(roundResults);
 container.appendChild(humanScoreDisplay);
 container.appendChild(compScoreDisplay);
+container.appendChild(gameOverDisplay);
 
 /*
 Objective: Write a function that randomly returns a string "rock", "paper", or "scissors".
@@ -92,6 +95,8 @@ Check for same selection. If either side chooses the same thing, its a tie, incr
 Check for computer winner. If human is NOT the winner, then increment the computerScore by 1.
 */
 function playRound(humanChoice, computerChoice) {
+    roundsPlayed++;
+
     if (humanChoice === "ROCK" && computerChoice === "Scissors") {
         console.log("You win! Rock beats Scissors!");
         roundResults.textContent = "You win! Rock beats Scissors!";
@@ -121,13 +126,25 @@ function playRound(humanChoice, computerChoice) {
 function checkWinner() {
     //Check who has higher score and declare winner
     if (humanScore > computerScore) {
-        console.log("Human is the overall winner with a score of: " + humanScore);
+        roundResults.textContent = "Human is the overall winner with a score of: " + humanScore;
     }
     else if (humanScore === computerScore) {
-        console.log("Human and computer both have the same score. It's a tie overall.")
+        roundResults.textContent = "Human and computer both have the same score. It's a tie overall.";
     }
     else {
-        console.log("Computer is the overall winner with a score of: " + computerScore);
+        roundResults.textContent = "Computer is the overall winner with a score of: " + computerScore;
+    }
+
+    gameOverDisplay.textContent = "GAME OVER.";
+
+    btnRock.disabled = true;
+    btnPaper.disabled = true;
+    btnScissors.disabled = true;
+}
+
+function checkFiveRounds(){
+    if(roundsPlayed == 5){
+        checkWinner();
     }
 }
 
@@ -140,19 +157,23 @@ btnRock.addEventListener("click", function () {
     console.log("ROCK IS CLICKED");
     playRound(getHumanChoice("ROCK"), getComputerChoice());
     updateScoreDisplay();
+    checkFiveRounds();
 });
 
 btnPaper.addEventListener("click", function () {
     console.log("PAPER IS CLICKED");
     playRound(getHumanChoice("PAPER"), getComputerChoice());
     updateScoreDisplay();
+    checkFiveRounds();
 });
 
 btnScissors.addEventListener("click", function () {
     console.log("SCISSORS IS CLICKED");
     playRound(getHumanChoice("SCISSORS"), getComputerChoice());
     updateScoreDisplay();
+    checkFiveRounds();
 });
+
 
 
 
