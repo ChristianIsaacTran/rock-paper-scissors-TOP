@@ -13,6 +13,25 @@ function playGame() {
     let humanScore = 0;
     let computerScore = 0;
 
+    const container = document.querySelector("#container");
+
+    const btnRock = document.createElement("button");
+    const btnPaper = document.createElement("button");
+    const btnScissors = document.createElement("button");
+
+    btnRock.textContent = "Rock";
+    btnPaper.textContent = "Paper";
+    btnScissors.textContent = "Scissors";
+
+    btnRock.style.margin = "10px";
+    btnPaper.style.margin = "10px";
+    btnScissors.style.margin = "10px";
+    
+    container.appendChild(btnRock);
+    container.appendChild(btnPaper);
+    container.appendChild(btnScissors);
+
+
     /*
 Objective: Write a function that randomly returns a string "rock", "paper", or "scissors".
 
@@ -93,15 +112,16 @@ else random variable equals anything else, return "scissors"
     }
 
 
+
     //Check who has higher score and declare winner
-    if(humanScore > computerScore){
-        console.log("Human is the overall winner with a score of: "+humanScore);
+    if (humanScore > computerScore) {
+        console.log("Human is the overall winner with a score of: " + humanScore);
     }
-    else if(humanScore === computerScore){
+    else if (humanScore === computerScore) {
         console.log("Human and computer both have the same score. It's a tie overall.")
     }
-    else{
-        console.log("Computer is the overall winner with a score of: "+computerScore);
+    else {
+        console.log("Computer is the overall winner with a score of: " + computerScore);
     }
 
 }
