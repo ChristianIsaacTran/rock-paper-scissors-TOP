@@ -13,6 +13,7 @@ let humanScore = 0;
 let computerScore = 0;
 
 const container = document.querySelector("#container");
+const results = document.createElement("div");
 
 const btnRock = document.createElement("button");
 const btnPaper = document.createElement("button");
@@ -29,6 +30,7 @@ btnScissors.style.margin = "10px";
 container.appendChild(btnRock);
 container.appendChild(btnPaper);
 container.appendChild(btnScissors);
+container.appendChild(results);
 
 
 /*
@@ -48,15 +50,12 @@ function getComputerChoice() {
     let randomNum = Math.floor(Math.random() * (max - min) + min);
 
     if (randomNum === 1) {
-        console.log("ROCK");
         return "Rock";
     }
     else if (randomNum === 2) {
-        console.log("PAPER");
         return "Paper";
     }
     else {
-        console.log("SCISSORS");
         return "Scissors";
     }
 }
@@ -90,21 +89,26 @@ Check for computer winner. If human is NOT the winner, then increment the comput
 function playRound(humanChoice, computerChoice) {
     if (humanChoice === "ROCK" && computerChoice === "Scissors") {
         console.log("You win! Rock beats Scissors!");
+        results.textContent = "You win! Rock beats Scissors!";
         humanScore++;
     }
     else if (humanChoice === "PAPER" && computerChoice === "Rock") {
         console.log("You win! Paper beats Rock!");
+        results.textContent = "You win! Paper beats Rock!";
         humanScore++;
     }
     else if (humanChoice === "SCISSORS" && computerChoice === "Paper") {
         console.log("You win! Scissors beats Paper!");
+        results.textContent = "You win! Scissors beats Paper!";
         humanScore++;
     }
     else if (humanChoice === computerChoice.toUpperCase()) {
         console.log("It's a tie! No one wins.")
+        results.textContent = "It's a tie! No one wins.";
     }
     else {
         console.log("You LOSE! " + computerChoice + " beats " + humanChoice + "!");
+        results.textContent = "You LOSE! " + computerChoice + " beats " + humanChoice + "!";
         computerScore++;
     }
 }
